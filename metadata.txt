@@ -1,0 +1,11 @@
+[general]
+name=ArqueoTransectas
+description=Genera líneas horizontales o verticales dentro de un área definida
+category=Vector
+version=1.0
+qgisMinimumVersion=3.10
+author=Victor Méndez
+email=victor.mendez@uc.cl
+tracker=https://github.com/arqueomendez/arqueotransectas/issues
+repository=https://github.com/arqueomendez/arqueotransectas
+icon=icon.png
