@@ -42,4 +42,4 @@ qgisMaximumVersion=3.99
 ; and any version of "YetAnotherPlugin".
 ; Both "MyOtherPlugin" and "YetAnotherPlugin" names come from their own metadata's
 ; name field
-;plugin_dependencies=
+; plugin_dependencies=
