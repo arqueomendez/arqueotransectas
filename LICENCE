@@ -1,0 +1,26 @@
+Copyright (C) 2024 Victor Méndez
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+### Additional Requirement for Citation
+
+If you use this plugin, in whole or in part, in a scientific publication, report, or any form of public work, you are required to explicitly cite it as follows:
+
+Méndez, V. (2024). ArqueoTransectas: A QGIS plugin for generating archaeological transects. Version 1.0. Available at: https://github.com/arqueomendez/arqueotransectas.
+
+Alternatively, you may include the citation in a "References" or "Acknowledgements" section, as appropriate.
+
+---
+
+### Full License Text
+
+GNU General Public License v3.0 (GPL-3.0)
+
+You can find the full text of the GPL-3.0 license at the following URL:
+<https://www.gnu.org/licenses/gpl-3.0.en.html>
