@@ -1,28 +1,33 @@
 from qgis.core import (
-    QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterNumber,
     QgsProcessingParameterEnum,
     QgsFeatureSink,
-    QgsProcessingContext,
     QgsProcessingException,
     QgsGeometry,
     QgsFeature,
     QgsPointXY,
     QgsWkbTypes,
+    QgsProcessing,
 )
 
 
 class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
+    """
+    Algoritmo para generar transectas arqueológicas.
+    """
+
     INPUT_LAYER = "INPUT_LAYER"
     TRANSECT_DIRECTION = "TRANSECT_DIRECTION"
     LINE_SPACING = "LINE_SPACING"
     OUTPUT_LAYER = "OUTPUT_LAYER"
 
     def initAlgorithm(self, config=None):
-        # Definir los parámetros del algoritmo
+        """
+        Definición de los parámetros del algoritmo.
+        """
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.INPUT_LAYER, "Selecciona una capa de polígonos", [QgsProcessing.TypeVectorPolygon]
@@ -46,7 +51,9 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        # Leer los parámetros de entrada
+        """
+        Ejecución del algoritmo.
+        """
         input_layer = self.parameterAsSource(parameters, self.INPUT_LAYER, context)
         direction = self.parameterAsEnum(parameters, self.TRANSECT_DIRECTION, context)
         spacing = self.parameterAsDouble(parameters, self.LINE_SPACING, context)
@@ -54,7 +61,6 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
         if not input_layer:
             raise QgsProcessingException("No se pudo cargar la capa de entrada.")
 
-        # Crear la capa de salida
         (sink, sink_id) = self.parameterAsSink(
             parameters,
             self.OUTPUT_LAYER,
@@ -67,7 +73,6 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
         if sink is None:
             raise QgsProcessingException("No se pudo crear la capa de salida.")
 
-        # Generar las transectas
         for feature in input_layer.getFeatures():
             geom = feature.geometry()
             bounds = geom.boundingBox()

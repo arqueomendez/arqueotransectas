@@ -1,11 +1,45 @@
+; the next section is mandatory
+
 [general]
 name=ArqueoTransectas
-description=Genera líneas horizontales o verticales dentro de un área definida
-category=Vector
-version=1.0
-qgisMinimumVersion=3.10
-author=Victor Méndez
 email=victor.mendez@uc.cl
+author=Victor Méndez
+qgisMinimumVersion=3.10
+description=Este complemento genera transectas arqueológicas (líneas horizontales o verticales) dentro de un área definida.
+    Puede ser útil para estudios de campo y proyectos arqueológicos.
+about=El complemento ArqueoTransectas permite crear líneas de transecta dentro de áreas delimitadas, con opciones de dirección
+    (horizontal o vertical) y separación configurable. Compatible con el marco de herramientas de procesamiento de QGIS.
+version=1.0
 tracker=https://github.com/arqueomendez/arqueotransectas/issues
 repository=https://github.com/arqueomendez/arqueotransectas
+
+; end of mandatory metadata
+
+; start of optional metadata
+category=Vector
+changelog=Historial de cambios del complemento:
+    1.0 - Primera versión estable.
+    0.9 - Implementación completa de funciones.
+    0.8 - Versión de prueba inicial.
+
+tags=transectas, arqueología, líneas, vector, estudio de campo
+
+homepage=https://github.com/arqueomendez/arqueotransectas
 icon=icon.png
+
+; experimental flag (applies to the single version)
+experimental=False
+
+; deprecated flag (applies to the whole plugin and not only to the uploaded version)
+deprecated=False
+
+; if empty, it will be automatically set to major version + .99
+qgisMaximumVersion=3.99
+
+; Since QGIS 3.8, a comma separated list of plugins to be installed
+; (or upgraded) can be specified.
+; The example below will try to install (or upgrade) "MyOtherPlugin" version 1.12
+; and any version of "YetAnotherPlugin".
+; Both "MyOtherPlugin" and "YetAnotherPlugin" names come from their own metadata's
+; name field
+plugin_dependencies=
