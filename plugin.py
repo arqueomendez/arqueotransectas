@@ -1,5 +1,9 @@
-from qgis.PyQt.QtWidgets import QAction, QMessageBox
+import os
+
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction
 from qgis.core import QgsApplication
+
 from .processing.arqueotransectas_provider import ArqueoTransectasProvider
 
 
@@ -23,13 +27,25 @@ class ArqueoTransectasPlugin:
         """
         Método para inicializar la interfaz gráfica del complemento.
         """
-        # Crear la acción del complemento
-        self.plugin_action = QAction("ArqueoTransectas: Generar Líneas", self.iface.mainWindow())
-        self.plugin_action.triggered.connect(self.show_help)
-        self.iface.addToolBarIcon(self.plugin_action)
-        self.iface.addPluginToMenu("Herramientas", self.plugin_action)
+        icon = QIcon(os.path.join(os.path.dirname(__file__), "icon.png"))
 
-        # Registrar el proveedor de algoritmos
+        self.plugin_action = QAction(
+            icon,
+            "Generar Líneas de Transecta",
+            self.iface.mainWindow(),
+        )
+        self.plugin_action.setToolTip(
+            "Genera transectas arqueológicas dentro de un área definida"
+        )
+        self.plugin_action.triggered.connect(self.run)
+
+        # Aparece en Complementos → ArqueoTransectas → Generar Líneas de Transecta
+        self.iface.addPluginToMenu("ArqueoTransectas", self.plugin_action)
+
+        # Botón en la barra de herramientas
+        self.iface.addToolBarIcon(self.plugin_action)
+
+        # Registrar el proveedor en la Caja de herramientas de procesamiento
         self.provider = ArqueoTransectasProvider()
         QgsApplication.processingRegistry().addProvider(self.provider)
 
@@ -37,20 +53,16 @@ class ArqueoTransectasPlugin:
         """
         Método para limpiar el complemento al desactivarlo.
         """
+        self.iface.removePluginMenu("ArqueoTransectas", self.plugin_action)
         self.iface.removeToolBarIcon(self.plugin_action)
-        self.iface.removePluginMenu("Herramientas", self.plugin_action)
 
-        # Eliminar el proveedor
         if self.provider:
             QgsApplication.processingRegistry().removeProvider(self.provider)
 
-    def show_help(self):
+    def run(self):
         """
-        Método que muestra un mensaje informativo al usuario.
+        Abre el diálogo del algoritmo directamente para su ejecución.
         """
-        QMessageBox.information(
-            None,
-            "Información",
-            "Este complemento genera transectas arqueológicas.\n"
-            "Encuentra el algoritmo en la Caja de herramientas de procesamiento.",
-        )
+        import processing
+
+        processing.execAlgorithmDialog("arqueotransectas_provider:arqueotransectas")
