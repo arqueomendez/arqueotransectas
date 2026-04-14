@@ -1,1 +1,2 @@
-pyrcc5 resources.qrc -o resources_rc.py
+# Resources compiled file — not required.
+# Icon is loaded directly by QGIS via icon=icon.png in metadata.txt.

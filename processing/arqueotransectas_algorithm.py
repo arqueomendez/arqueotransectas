@@ -9,8 +9,7 @@ from qgis.core import (
     QgsGeometry,
     QgsFeature,
     QgsPointXY,
-    QgsWkbTypes,
-    QgsProcessing,
+    Qgis,
 )
 
 
@@ -30,24 +29,34 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
         """
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.INPUT_LAYER, "Selecciona una capa de polígonos", [QgsProcessing.TypeVectorPolygon]
+                self.INPUT_LAYER,
+                "Selecciona una capa de polígonos",
+                [Qgis.ProcessingSourceType.TypeVectorPolygon],
             )
         )
 
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.TRANSECT_DIRECTION, "Dirección de las transectas", options=["Vertical", "Horizontal"], defaultValue=0
+                self.TRANSECT_DIRECTION,
+                "Dirección de las transectas",
+                options=["Vertical", "Horizontal"],
+                defaultValue=0,
             )
         )
 
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.LINE_SPACING, "Distancia entre líneas (en unidades de mapa)", QgsProcessingParameterNumber.Double, 100
+                self.LINE_SPACING,
+                "Distancia entre líneas (en unidades de mapa)",
+                Qgis.ProcessingNumberParameterType.Double,
+                100,
             )
         )
 
         self.addParameter(
-            QgsProcessingParameterFeatureSink(self.OUTPUT_LAYER, "Capa de salida (transectas)")
+            QgsProcessingParameterFeatureSink(
+                self.OUTPUT_LAYER, "Capa de salida (transectas)"
+            )
         )
 
     def processAlgorithm(self, parameters, context, feedback):
@@ -66,7 +75,7 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
             self.OUTPUT_LAYER,
             context,
             input_layer.fields(),
-            QgsWkbTypes.LineString,
+            Qgis.WkbType.LineString,
             input_layer.sourceCrs(),
         )
 
@@ -82,22 +91,30 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
             if direction == 0:  # Vertical
                 x = xmin
                 while x <= xmax:
-                    line = QgsGeometry.fromPolylineXY([QgsPointXY(x, ymin), QgsPointXY(x, ymax)])
+                    line = QgsGeometry.fromPolylineXY(
+                        [QgsPointXY(x, ymin), QgsPointXY(x, ymax)]
+                    )
                     line_clipped = line.intersection(geom)
                     if line_clipped:
                         transect_feature = QgsFeature()
                         transect_feature.setGeometry(line_clipped)
-                        sink.addFeature(transect_feature, QgsFeatureSink.FastInsert)
+                        sink.addFeature(
+                            transect_feature, QgsFeatureSink.Flag.FastInsert
+                        )
                     x += spacing
             else:  # Horizontal
                 y = ymin
                 while y <= ymax:
-                    line = QgsGeometry.fromPolylineXY([QgsPointXY(xmin, y), QgsPointXY(xmax, y)])
+                    line = QgsGeometry.fromPolylineXY(
+                        [QgsPointXY(xmin, y), QgsPointXY(xmax, y)]
+                    )
                     line_clipped = line.intersection(geom)
                     if line_clipped:
                         transect_feature = QgsFeature()
                         transect_feature.setGeometry(line_clipped)
-                        sink.addFeature(transect_feature, QgsFeatureSink.FastInsert)
+                        sink.addFeature(
+                            transect_feature, QgsFeatureSink.Flag.FastInsert
+                        )
                     y += spacing
 
         return {self.OUTPUT_LAYER: sink_id}

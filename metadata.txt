@@ -4,12 +4,12 @@
 name=ArqueoTransectas
 email=victor.mendez@uc.cl
 author=Victor Méndez
-qgisMinimumVersion=3.10
+qgisMinimumVersion=3.28
 description=Este complemento genera transectas arqueológicas (líneas horizontales o verticales) dentro de un área definida.
     Puede ser útil para estudios de campo y proyectos arqueológicos.
 about=El complemento ArqueoTransectas permite crear líneas de transecta dentro de áreas delimitadas, con opciones de dirección
     (horizontal o vertical) y separación configurable. Compatible con el marco de herramientas de procesamiento de QGIS.
-version=1.0
+version=2.0
 tracker=https://github.com/arqueomendez/arqueotransectas/issues
 repository=https://github.com/arqueomendez/arqueotransectas
 
@@ -18,6 +18,7 @@ repository=https://github.com/arqueomendez/arqueotransectas
 ; start of optional metadata
 category=Vector
 changelog=Historial de cambios del complemento:
+    2.0 - Compatibilidad con QGIS 4 (mínimo QGIS 3.28). Migración de enums a la nueva API Qgis.*.
     1.0 - Primera versión estable.
     0.9 - Implementación completa de funciones.
     0.8 - Versión de prueba inicial.
@@ -34,7 +35,7 @@ experimental=False
 deprecated=False
 
 ; if empty, it will be automatically set to major version + .99
-qgisMaximumVersion=3.99
+qgisMaximumVersion=4.99
 
 ; Since QGIS 3.8, a comma separated list of plugins to be installed
 ; (or upgraded) can be specified.
