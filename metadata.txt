@@ -9,7 +9,7 @@ description=Este complemento genera transectas arqueológicas (líneas horizonta
     Puede ser útil para estudios de campo y proyectos arqueológicos.
 about=El complemento ArqueoTransectas permite crear líneas de transecta dentro de áreas delimitadas, con opciones de dirección
     (horizontal o vertical) y separación configurable. Compatible con el marco de herramientas de procesamiento de QGIS.
-version=2.0.1
+version=2.0.2
 tracker=https://github.com/arqueomendez/arqueotransectas/issues
 repository=https://github.com/arqueomendez/arqueotransectas
 
@@ -18,6 +18,7 @@ repository=https://github.com/arqueomendez/arqueotransectas
 ; start of optional metadata
 category=Vector
 changelog=Historial de cambios del complemento:
+    2.0.2 - Caja de herramientas simplificada. Algoritmo directamente bajo ArqueoTransectas sin subgrupo.
     2.0.1 - Corrección de error al procesar polígonos con bordes tangentes. Plugin accesible desde el menú Complementos.
     2.0 - Compatibilidad con QGIS 4 (mínimo QGIS 3.28). Migración de enums a Qgis.*.
     1.0 - Primera versión estable.
