@@ -129,13 +129,13 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
         return "arqueotransectas"
 
     def displayName(self):
-        return "ArqueoTransectas: Generar Líneas"
+        return "Generar Líneas"
 
     def group(self):
-        return "Herramientas Personalizadas"
+        return ""
 
     def groupId(self):
-        return "herramientas_personalizadas"
+        return ""
 
     def createInstance(self):
         return ArqueoTransectasAlgorithm()
