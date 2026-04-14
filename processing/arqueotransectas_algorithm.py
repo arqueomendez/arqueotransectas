@@ -95,7 +95,10 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
                         [QgsPointXY(x, ymin), QgsPointXY(x, ymax)]
                     )
                     line_clipped = line.intersection(geom)
-                    if line_clipped:
+                    if (
+                        not line_clipped.isEmpty()
+                        and line_clipped.type() == Qgis.GeometryType.Line
+                    ):
                         transect_feature = QgsFeature()
                         transect_feature.setGeometry(line_clipped)
                         sink.addFeature(
@@ -109,7 +112,10 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
                         [QgsPointXY(xmin, y), QgsPointXY(xmax, y)]
                     )
                     line_clipped = line.intersection(geom)
-                    if line_clipped:
+                    if (
+                        not line_clipped.isEmpty()
+                        and line_clipped.type() == Qgis.GeometryType.Line
+                    ):
                         transect_feature = QgsFeature()
                         transect_feature.setGeometry(line_clipped)
                         sink.addFeature(
