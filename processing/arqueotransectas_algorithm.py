@@ -137,5 +137,37 @@ class ArqueoTransectasAlgorithm(QgsProcessingAlgorithm):
     def groupId(self):
         return ""
 
+    def shortHelpString(self):
+        return (
+            "Generates evenly spaced transect lines (vertical or horizontal) clipped "
+            "to the boundary of one or more input polygons."
+            "<br><br>"
+            "<b>Parameters</b>"
+            "<br><br>"
+            "<b>Input polygon layer</b>: Vector layer containing the area(s) within "
+            "which transects will be generated. Must be a polygon layer."
+            "<br><br>"
+            "<b>Transect direction</b>:<br>"
+            "- <i>Vertical</i>: lines run from bottom to top of each polygon's bounding box.<br>"
+            "- <i>Horizontal</i>: lines run from left to right."
+            "<br><br>"
+            "<b>Line spacing</b>: Distance between consecutive transect lines, in the "
+            "map units of the input layer's CRS."
+            "<br><br>"
+            "<b>Output layer</b>: LineString layer containing the clipped transect lines. "
+            "Each transect is stored as a separate feature."
+            "<br><br>"
+            "<b>Notes</b><br>"
+            "- Transects are clipped to the exact polygon boundary, not the bounding box.<br>"
+            "- If a transect only grazes a polygon vertex, it is automatically discarded.<br>"
+            "- For best results, ensure the input layer uses a projected CRS (metres or "
+            "feet) so that the spacing value is meaningful."
+            "<br><br>"
+            "<b>Citation</b><br>"
+            "If you use this plugin in your research or project, please cite it as:<br>"
+            "<a href='https://github.com/arqueomendez/arqueotransectas'>"
+            "https://github.com/arqueomendez/arqueotransectas</a>"
+        )
+
     def createInstance(self):
         return ArqueoTransectasAlgorithm()
