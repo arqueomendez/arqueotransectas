@@ -1,0 +1,46 @@
+name: Release to plugins.qgis.org
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build plugin zip
+        run: |
+          git archive \
+            --prefix=arqueotransectas/ \
+            --format=zip \
+            HEAD \
+            -o arqueotransectas.zip
+
+      - name: Upload to plugins.qgis.org
+        run: |
+          curl -X POST \
+               -H "Authorization: Bearer ${{ secrets.QGIS_TOKEN }}" \
+               -F "package=@arqueotransectas.zip" \
+               --fail-with-body \
+               https://plugins.qgis.org/plugins/api/arqueotransectas/version/add/
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            arqueotransectas.zip \
+            --title "ArqueoTransectas ${{ steps.version.outputs.VERSION }}" \
+            --notes "Release ${{ steps.version.outputs.VERSION }}"

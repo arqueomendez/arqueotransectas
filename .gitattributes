@@ -1,0 +1,4 @@
+.github/          export-ignore
+.gitattributes    export-ignore
+.ruff_cache/      export-ignore
+resources.qrc     export-ignore
